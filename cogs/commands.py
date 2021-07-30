@@ -13,12 +13,12 @@ class Commands(commands.Cog):
 
     #Commands
     @commands.command()
-    async def ping(ctx):
+    async def ping(self, ctx):
         await ctx.send('Example Message')
 
 
     @commands.command()
-    async def clear(ctx, amount=5):
+    async def clear(self, ctx, amount=5):
         if amount > 0 and amount < 11:
             await ctx.channel.purge(limit=amount)
         else:
