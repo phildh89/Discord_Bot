@@ -3,12 +3,12 @@ from discord.ext import commands
 
 class Commands(commands.Cog):
     
-    def __init__(self,bot):
-        self.bot = bot
+    def __init__(self,client):
+        self.client = client
     
     #Events
     @commands.Cog.listener()
-    async def on_ready():
+    async def on_ready(self):
         print('Bot is ready.')
 
     #Commands
@@ -25,6 +25,6 @@ class Commands(commands.Cog):
             await ctx.send("I can only delete 1 to 10 messages at a time!")
 
 
-def setup(bot):
-    bot.add_cog(commands(bot))
+def setup(client):
+    client.add_cog(Commands(client))
 
