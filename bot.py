@@ -7,20 +7,17 @@ import os
 bot = commands.Bot(command_prefix = '!')
 load_dotenv('.env')
 
-@bot.event
-async def on_ready():
-    print('Bot is ready.')
+@bot.command()
+async def load (ctx, extension):
+    bot.load_extension(f'cogs.{extension}')
 
 @bot.command()
-async def ping(ctx):
-    await ctx.send('Example Message')
+async def unload (ctx, extension):
+    bot.unload_extension(f'cogs.{extension}')
 
+for filename in os.listdir('./cogs'):
+    if filename.endswith('.py'):
+        bot.load_extension(f'cogs.{filename[:-3]}')
 
-@bot.command()
-async def clear(ctx, amount=5):
-    if amount > 0 and amount < 11:
-        await ctx.channel.purge(limit=amount)
-    else:
-        await ctx.send("I can only delete 1 to 10 messages at a time!")
 
 bot.run(os.getenv('BOT_TOKEN'))
